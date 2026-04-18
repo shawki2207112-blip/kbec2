@@ -26,7 +26,7 @@
     <nav class="nav-links">
         <a href="#">Home</a>
         <a href="#">About</a>
-        <a href="#events">Events</a>
+        <a href="events.html">Events</a>
         <a href="#">Alumni</a>
     </nav>
 
@@ -130,38 +130,7 @@
     </div>
 </footer>
 
-<script>
-(() => {
-    const button = document.getElementById('profileMenuButton');
-    const menu = document.getElementById('profileMenu');
-    if (!button || !menu) return;
-
-    const setOpen = (open) => {
-        menu.hidden = !open;
-        button.setAttribute('aria-expanded', String(open));
-    };
-
-    button.addEventListener('click', (e) => {
-        e.stopPropagation();
-        setOpen(menu.hidden);
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!menu.hidden && !menu.contains(e.target) && e.target !== button) setOpen(false);
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setOpen(false);
-    });
-
-    // Optional: placeholder behavior (no new pages/files)
-    menu.addEventListener('click', (e) => {
-        const item = e.target.closest('.profile-menu-item');
-        if (!item) return;
-        setOpen(false);
-    });
-})();
-</script>
+<script src="kbec.js"></script>
 
 </body>
 </html>
