@@ -17,37 +17,61 @@ Hope this helps! Let me know if you need any other adjustments!
         `
         ,
         location: "KUET Auditorium, Khulna",
-        registerLink: "https://example.com/register-tedx"
+        registerLink: "https://example.com/register-tedx",
+        facebookLink: "https://www.facebook.com/events/2439190826531758"
     }
 };
 
+function setLink(anchorEl, url) {
+    if (!anchorEl) return;
+    if (!url) {
+        anchorEl.hidden = true;
+        anchorEl.removeAttribute('href');
+        return;
+    }
 
-// GET EVENT FROM URL
-const params = new URLSearchParams(window.location.search);
-const eventKey = params.get("event");
+    anchorEl.hidden = false;
+    anchorEl.href = url;
+}
+
+
 
 
 // LOAD EVENT DATA
 function loadEvent() {
-    if (!eventsData[eventKey]) {
+ const params = new URLSearchParams(window.location.search);
+    const eventKey = params.get("event") || Object.keys(eventsData)[0];
+
+    if (!eventKey || !eventsData[eventKey]) {
         document.body.innerHTML = `
-            <h1 style="text-align:center; margin-top:100px;">
-                Event not found
-            </h1>
+            <h1 style="text-align:center; margin-top:100px;">Event not found</h1>
         `;
         return;
     }
 
     const event = eventsData[eventKey];
 
-    document.getElementById("eventTitle").innerText = event.title;
-    document.getElementById("eventImage").src = event.image;
-    document.getElementById("eventDesc").innerText = event.desc;
-    document.getElementById("eventLocation").innerText = event.location;
-    document.getElementById("registerBtn").href = event.registerLink;
+    const titleEl = document.getElementById("eventTitle");
+    const imageEl = document.getElementById("eventImage");
+    const descEl = document.getElementById("eventDesc");
+    const locationEl = document.getElementById("eventLocation");
 
-    document.title = event.title;
+    if (titleEl) titleEl.innerText = event.title || "";
+    if (imageEl) {
+        imageEl.src = event.image || "";
+        imageEl.alt = event.title || "Event image";
+    }
+    if (descEl) descEl.innerText = event.desc || "";
+    if (locationEl) locationEl.innerText = event.location || "";
+
+    setLink(document.getElementById("registerBtn"), event.registerLink);
+    setLink(document.getElementById("facebookBtn"), event.facebookLink);
+
+    document.title = event.title || document.title;
 }
 
-
-loadEvent();
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadEvent);
+} else {
+    loadEvent();
+}

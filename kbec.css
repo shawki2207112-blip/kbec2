@@ -266,7 +266,6 @@ section{
     flex-wrap:wrap;
 }
 
-
 .sponsor-marquee{
     margin-top:30px;
     overflow:hidden;
@@ -295,6 +294,7 @@ section{
         width:100%;
     }
 }
+
 .sponsor-logos div{
     width:120px;
     height:80px;
@@ -391,14 +391,16 @@ section{
     .profile-menu{
         right:25px;
     }
-    .event-location{
+}
+
+.event-location{
     margin: 10px 0 20px;
     color: #f5c518;
     font-weight: 500;
     display: flex;
     align-items: center;
     gap: 8px;
-    }
+}
 
 .register-btn{
     display: inline-block;
@@ -410,10 +412,9 @@ section{
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
-    }
+}
 
 .register-btn:hover{
     transform: translateY(-3px);
     box-shadow: 0 0 15px #f5c51855;
-    }
 }
